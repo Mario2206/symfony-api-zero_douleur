@@ -5,3 +5,8 @@
 home : 
   path : /home
   controller : App\Controller\HomeController::homePage
+
+user_sub : 
+  path : /user
+  controller : App\Controller\UserController::subscribe
+  methods : POST
