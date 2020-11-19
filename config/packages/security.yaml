@@ -20,11 +20,13 @@ security:
             anonymous: true
             lazy: true
             provider: app_user_provider
-            logout:
-                path: app_logout
             guard:
                 authenticators:
-                    - App\Security\UserAuthenticator
+                    - App\Security\UserSecurityAuthenticator
+            logout:
+                path: app_logout
+                # where to redirect after logout
+                # target: app_any_route
                 # where to redirect after logout
                 # target: app_any_route
 
