@@ -63,6 +63,7 @@ class User implements UserInterface
 
     public function __construct () {
         $this->createdAt = new \DateTime();
+        $this->roles = ["ROLE_USER"];
     }
 
     public function getId(): ?int
