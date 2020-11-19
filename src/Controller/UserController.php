@@ -20,7 +20,7 @@ class UserController extends AbstractController {
         ->setLastname($formated->lastname)
         ->setFirstname($formated->firstname)
         ->setUsername($formated->username)
-        ->setMail($formated->mail)
+        ->setEmail($formated->mail)
         ->setPassword($formated->password)
         ->setCreatedAt(new DateTime());
 
