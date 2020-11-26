@@ -16,11 +16,11 @@ class SecurityController extends AbstractController
     public function login(AuthenticationUtils $authenticationUtils): JsonResponse
     {
         
-        $username = $authenticationUtils->getLastUsername();
+        $user = $this->getUser();
    
 
         return new JsonResponse([
-            "username"=>$username
+            "username"=>$user->getUsername()
         ]);
     }
 

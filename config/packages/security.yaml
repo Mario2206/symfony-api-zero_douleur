@@ -10,7 +10,7 @@ security:
         app_user_provider:
             entity:
                 class: App\Entity\User
-                property: email
+                property: 'username'
         # used to reload user from session & other features (e.g. switch_user)
     firewalls:
         dev:
@@ -35,7 +35,7 @@ security:
             pattern: ^/api
             stateless: true
             guard:
-                authenticators:
+                authenticators: 
                     - lexik_jwt_authentication.jwt_token_authenticator
 
         main:
@@ -61,5 +61,5 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }

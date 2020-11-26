@@ -3,12 +3,13 @@
 namespace App\Entity;
 
 use App\Repository\ContentVideoRepository;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=ContentVideoRepository::class)
  */
-class ContentVideo
+class Media
 {
     /**
      * @ORM\Id
@@ -41,6 +42,16 @@ class ContentVideo
      * @ORM\Column(type="text")
      */
     private $filename;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $uploadedAt;
+
+    public function __construct()
+    {
+        $this->uploadedAt = new DateTime();
+    }
 
     public function getId(): ?int
     {
@@ -103,6 +114,18 @@ class ContentVideo
     public function setFilename(string $filename): self
     {
         $this->filename = $filename;
+
+        return $this;
+    }
+
+    public function getUploadedAt(): ?\DateTimeInterface
+    {
+        return $this->uploadedAt;
+    }
+
+    public function setUploadedAt(\DateTimeInterface $uploadedAt): self
+    {
+        $this->uploadedAt = $uploadedAt;
 
         return $this;
     }
