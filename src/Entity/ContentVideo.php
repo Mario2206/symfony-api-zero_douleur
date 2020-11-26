@@ -40,7 +40,7 @@ class ContentVideo
     /**
      * @ORM\Column(type="text")
      */
-    private $contentLink;
+    private $filename;
 
     public function getId(): ?int
     {
@@ -95,14 +95,14 @@ class ContentVideo
         return $this;
     }
 
-    public function getContentLink(): ?string
+    public function getFilename(): ?string
     {
-        return $this->contentLink;
+        return $this->filename;
     }
 
-    public function setContentLink(string $contentLink): self
+    public function setFilename(string $filename): self
     {
-        $this->contentLink = $contentLink;
+        $this->filename = $filename;
 
         return $this;
     }
