@@ -13,7 +13,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class RegistrationController extends AbstractController
 {
     /**
-     * @Route("/user/register", name="app_register")
+     * @Route("/api/register", name="app_register", methods={"POST"})
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
@@ -24,7 +24,7 @@ class RegistrationController extends AbstractController
         $form->submit($jsonRequest);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
+            
             $user->setPassword(
                 $passwordEncoder->encodePassword(
                     $user,
