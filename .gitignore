@@ -19,4 +19,4 @@
 /config/jwt/*.pem
 ###< lexik/jwt-authentication-bundle ###
 
-/public/uploads/media
+public/uploads/

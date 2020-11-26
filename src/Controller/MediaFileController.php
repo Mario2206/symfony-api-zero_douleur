@@ -17,6 +17,8 @@ class MediaFileController extends AbstractController {
      * @Route("/api/upload", name="app_upload", methods={"POST"} )
      */
     public function uploadAudio(Request $request, SluggerInterface $slugger) {
+
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         
         $media = new Media();
 
