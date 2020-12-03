@@ -10,13 +10,20 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\Length;
 
 class MediaFileType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add("contentTitle", TextType::class)
+            ->add("id", TextType::class, [
+                "required" => false,
+                "mapped" => false
+            ])
+            ->add("contentTitle", TextType::class, [
+                "constraints" => [new Length(["min"=> 2, "minMessage" => "Content title is too short"])]
+            ])
             ->add("contentDescription", TextType::class)
             ->add("contentCategory", TextType::class)
             ->add("contentTags", TextType::class)
@@ -31,7 +38,7 @@ class MediaFileType extends AbstractType {
                             "audio/mpeg",
                             "video/mp4"
                         ],
-                        "mimeTypesMessage" => "Please upload a valid audio file (like mp3 or mp4)"
+                        'mimeTypesMessage' => "Please upload a valid audio file (like mp3 or mp4)"
                     ])
                 ]
             ]);

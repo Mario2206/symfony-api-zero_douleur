@@ -20,14 +20,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64db6718-ac58-4934-a978-f6e2232bb96f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/MediaFileController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/MediaFileController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/MediaFileType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/MediaFileType.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+  <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
@@ -138,6 +141,9 @@
       <path value="$PROJECT_DIR$/vendor/psr/event-dispatcher" />
       <path value="$PROJECT_DIR$/vendor/psr/log" />
       <path value="$PROJECT_DIR$/vendor/psr/cache" />
+      <path value="$PROJECT_DIR$/vendor/namshi/jose" />
+      <path value="$PROJECT_DIR$/vendor/lexik/jwt-authentication-bundle" />
+      <path value="$PROJECT_DIR$/vendor/lcobucci/jwt" />
     </include_path>
   </component>
   <component name="ProjectId" id="1kVGoMYkWgsvXTBvtTArABzYmAO" />
@@ -148,9 +154,9 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/test.php" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="terminal" />
+    <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -167,6 +173,10 @@
       <option name="presentableId" value="Default" />
       <updated>1605778518182</updated>
       <workItem from="1605778519241" duration="11013000" />
+      <workItem from="1606564787440" duration="15000" />
+      <workItem from="1606564803671" duration="66000" />
+      <workItem from="1606564908996" duration="131000" />
+      <workItem from="1606565048834" duration="748000" />
     </task>
     <servers />
   </component>
@@ -183,16 +193,17 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="740" y="281" key="FileChooserDialogImpl" timestamp="1605780726540">
+    <state x="740" y="281" key="FileChooserDialogImpl" timestamp="1606564838577">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="740" y="281" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1605780726540" />
-    <state x="461" y="185" key="SettingsEditor" timestamp="1605780734472">
+    <state x="740" y="281" key="FileChooserDialogImpl/0.0.1920.1080@0.0.1920.1080" timestamp="1606564838577" />
+    <state x="461" y="185" key="SettingsEditor" timestamp="1606565082360">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="461" y="185" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1605780734472" />
+    <state x="461" y="185" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1606565082360" />
     <state x="615" y="250" key="run.anything.popup" timestamp="1605784792207">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>

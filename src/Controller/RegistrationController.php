@@ -13,7 +13,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class RegistrationController extends AbstractController
 {
     /**
-     * @Route("/api/register", name="app_register", methods={"POST"})
+     * @Route("/register", name="app_register", methods={"POST"})
      */
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
@@ -39,6 +39,6 @@ class RegistrationController extends AbstractController
             return new Response("User created");
         }
 
-        return new Response("Errors" . $form->getErrors());
+        return new Response("Errors" .  $form->getErrors(true));
     }
 }
