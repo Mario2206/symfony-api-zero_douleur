@@ -22,8 +22,8 @@ class RegistrationController extends AbstractController
 
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->submit($jsonRequest);
-
-        if ($form->isSubmitted() && $form->isValid()) {
+        
+        if ($form->isValid()) {
             
             $user->setPassword(
                 $passwordEncoder->encodePassword(

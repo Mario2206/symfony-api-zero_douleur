@@ -2,21 +2,21 @@
 
 namespace App\Repository;
 
-use App\Entity\ContentVideo;
+use App\Entity\Media;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method ContentVideo|null find($id, $lockMode = null, $lockVersion = null)
- * @method ContentVideo|null findOneBy(array $criteria, array $orderBy = null)
- * @method ContentVideo[]    findAll()
- * @method ContentVideo[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Media|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Media|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Media[]    findAll()
+ * @method Media[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ContentVideoRepository extends ServiceEntityRepository
+class MediaRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, ContentVideo::class);
+        parent::__construct($registry, Media::class);
     }
 
     // /**

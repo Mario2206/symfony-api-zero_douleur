@@ -9,7 +9,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
- * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * @UniqueEntity(fields={"email", "username"}, message="There is already an account with this email or this username")
  */
 class User implements UserInterface
 {
@@ -22,11 +22,20 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\NotBlank(message="Email shouldn't be blank")
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email."
+     * )
      */
     private $email;
 
     /**
      * @ORM\Column(type="json")
+     * @Assert\All({
+     *          @Assert\ExpressionLanguageSyntax(
+     *          allowedVariables={"ROLE_USER", "ROLE_ADMIN"}
+     *      )
+     * })
      */
     private $roles = [];
 
@@ -38,16 +47,34 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\Length(
+     *      min=2,
+     *      max=50,
+     *      minMessage="{{ value }} is too short",
+     *      maxMessage="{{ value }} is too long"
+     * )
      */
     private $username;
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\Length(
+     *      min=2,
+     *      max=50,
+     *      minMessage="{{ value }} is too short",
+     *      maxMessage="{{ value }} is too long"
+     * )
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\Length(
+     *      min=2,
+     *      max=50,
+     *      minMessage="{{ value }} is too short",
+     *      maxMessage="{{ value }} is too long"
+     * )
      */
     private $lastname;
 

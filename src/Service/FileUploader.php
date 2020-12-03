@@ -4,6 +4,8 @@ namespace App\Service;
 
 use DateTime;
 use Exception;
+use Symfony\Component\Filesystem\Exception\IOException;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\Exception\UploadException;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -15,12 +17,15 @@ class FileUploader {
 
     private $targetDirectory;
 
+    private $filesystem;
+
 
     
-    public function __construct($targetDirectory, SluggerInterface $slugger )
+    public function __construct($targetDirectory, SluggerInterface $slugger, Filesystem $filesystem )
     {
         $this->targetDirectory = $targetDirectory;
         $this->slugger = $slugger;
+        $this->filesystem = $filesystem;
     }
 
     /**
@@ -80,7 +85,16 @@ class FileUploader {
 
     public function deleteFile(string $filename) 
     {
-        $this->filesystem->remove($this->targetDirectory . "/" . $filename);
+        try {
+
+             $this->filesystem->remove($this->targetDirectory . "/" . $filename);
+
+        } catch(IOException $e) {
+
+            throw new IOException("An error ocurred during file removing");
+
+        }
+       
     }
 
 }

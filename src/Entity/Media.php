@@ -2,12 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\ContentVideoRepository;
+use App\Repository\MediaRepository;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass=ContentVideoRepository::class)
+ * @ORM\Entity(repositoryClass=MediaRepository::class)
  */
 class Media
 {
@@ -20,31 +22,46 @@ class Media
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="Title shouldn't be blank")
+     * @Assert\Length(
+     *          min=2, 
+     *          max=100,
+     *          minMessage="Title must be at least {{ limit }} characters long",
+     *          maxMessage="Title cannot be longer than {{ limit }} characters"
+     * )
      */
-    private $contentTitle;
+    private $title;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="Description shouldn't be blank")
      */
-    private $contentDescription;
+    private $description;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="Tags shouldn't be blank")
      */
-    private $contentCategory;
+    private $tags;
 
     /**
      * @ORM\Column(type="text")
-     */
-    private $contentTags;
-
-    /**
-     * @ORM\Column(type="text")
+     * 
      */
     private $filename;
 
     /**
+     * @Assert\File(
+     *      maxSize="100m",
+     *      mimeTypes={"audio/mpeg","video/mp4"},
+     *      mimeTypesMessage = "Please upload a valid audio file (like mp3 or mp4)"
+     * )
+     */
+    private $mediaFile;
+
+    /**
      * @ORM\Column(type="datetime")
+     * 
      */
     private $uploadedAt;
 
@@ -58,50 +75,38 @@ class Media
         return $this->id;
     }
 
-    public function getContentTitle(): ?string
+    public function getTitle(): ?string
     {
-        return $this->contentTitle;
+        return $this->title;
     }
 
-    public function setContentTitle(string $contentTitle): self
+    public function setTitle(string $title): self
     {
-        $this->contentTitle = $contentTitle;
+        $this->title = $title;
 
         return $this;
     }
 
-    public function getContentDescription(): ?string
+    public function getDescription(): ?string
     {
-        return $this->contentDescription;
+        return $this->description;
     }
 
-    public function setContentDescription(string $contentDescription): self
+    public function setDescription(string $description): self
     {
-        $this->contentDescription = $contentDescription;
+        $this->description = $description;
 
         return $this;
     }
 
-    public function getContentCategory(): ?string
+    public function getTags(): ?string
     {
-        return $this->contentCategory;
+        return $this->tags;
     }
 
-    public function setContentCategory(string $contentCategory): self
+    public function setTags(string $tags): self
     {
-        $this->contentCategory = $contentCategory;
-
-        return $this;
-    }
-
-    public function getContentTags(): ?string
-    {
-        return $this->contentTags;
-    }
-
-    public function setContentTags(string $contentTags): self
-    {
-        $this->contentTags = $contentTags;
+        $this->tags = $tags;
 
         return $this;
     }
@@ -128,5 +133,25 @@ class Media
         $this->uploadedAt = $uploadedAt;
 
         return $this;
+    }
+
+    /**
+     * Set file
+     * 
+     * @param UploadedFile
+     */
+    public function setMediaFile(UploadedFile $file = null) : void
+    {
+        $this->mediaFile = $file;
+    }
+
+    /**
+     * Get file
+     * 
+     * @return UploadedFile
+     */
+    public function getMediaFile () : ?UploadedFile
+    {
+        return $this->mediaFile;
     }
 }
