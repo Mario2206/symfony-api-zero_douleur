@@ -29,7 +29,7 @@ class MediaManagerController extends AbstractController {
     }
 
     /**
-     * @Route("/api/upload", name="app_upload", methods={"POST"} )
+     * @Route("/api/auth/upload", name="app_upload", methods={"POST"} )
      */
     public function uploadMedia( Request $request) {
 
@@ -68,7 +68,7 @@ class MediaManagerController extends AbstractController {
         catch (UploadException $e) 
         {
 
-            return new Response($e->getMessage());
+            return new Response($e->getMessage(), HTTP_SERVER_ERROR);
 
         }
         catch(InvalidTypeException $e) 
@@ -88,7 +88,7 @@ class MediaManagerController extends AbstractController {
     }
 
     /**
-     * @Route("/api/upload/{mediaId}", name="app_upload_put", methods={"POST"})
+     * @Route("/api/auth/upload/{mediaId}", name="app_upload_put", methods={"POST"})
      */
     public function updateMedia ($mediaId, Request $request, ValidatorInterface $validator) {
 
