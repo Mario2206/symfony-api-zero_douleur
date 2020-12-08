@@ -29,9 +29,10 @@ class SessionManagerController extends AbstractController {
     }
 
     /**
+     * 
      * @Route("/api/auth/upload", name="app_upload", methods={"POST"} )
      */
-    public function uploadMedia( Request $request) {
+    public function createSession( Request $request) {
 
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 
@@ -90,7 +91,7 @@ class SessionManagerController extends AbstractController {
     /**
      * @Route("/api/auth/upload/{mediaId}", name="app_upload_put", methods={"POST"})
      */
-    public function updateMedia ($mediaId, Request $request, ValidatorInterface $validator) {
+    public function updateSession ($mediaId, Request $request, ValidatorInterface $validator) {
 
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
 

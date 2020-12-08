@@ -19,22 +19,24 @@ class CustomerFeelingsRepository extends ServiceEntityRepository
         parent::__construct($registry, CustomerFeelings::class);
     }
 
-    // /**
-    //  * @return CustomerFeelings[] Returns an array of CustomerFeelings objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+      * @return CustomerFeelings[] Returns an array of CustomerFeelings objects
+     */
+    
+    public function findMostRecentCustomerFeelings($sessionId, $userId)
     {
         return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
+            ->andWhere('c.sessionId = :sessionId')
+            ->andWhere('c.userId = :userId')
+            ->setParameter('sessionId', $sessionId)
+            ->setParameter('userId', $userId)
+            ->orderBy('c.createdAt', 'DESC')
+            ->setMaxResults(1)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+    
 
     /*
     public function findOneBySomeField($value): ?CustomerFeelings

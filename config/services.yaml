@@ -35,4 +35,5 @@ services:
             $targetDirectory : "%kernel.project_dir%/public/uploads/media"
     
     App\Service\Serializer\ISerializerFactory : '@App\Service\Serializer\SerializerFactory'
+    
 

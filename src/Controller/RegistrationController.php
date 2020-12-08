@@ -18,10 +18,9 @@ class RegistrationController extends AbstractController
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $user = new User();
-        $jsonRequest = json_decode($request->getContent(), true);
 
         $form = $this->createForm(RegistrationFormType::class, $user);
-        $form->submit($jsonRequest);
+        $form->submit($request->request->all());
         
         if ($form->isValid()) {
             

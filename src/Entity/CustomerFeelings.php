@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\CustomerFeelingsRepository;
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -25,6 +26,7 @@ class CustomerFeelings
      *      max=10,
      *      notInRangeMessage="The feeling notation must be between {{ min }} and {{ max }}"
      * )
+     * @Assert\NotBlank(message="The pre-notation can't be blank")
      */
     private $preNotation;
 
@@ -42,7 +44,7 @@ class CustomerFeelings
      *      notInRangeMessage="The feeling notation must be between {{ min }} and {{ max }}"
      * )
      */
-    private $postFeelings;
+    private $postNotation;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -53,13 +55,24 @@ class CustomerFeelings
     /**
      * @ORM\Column(type="datetime")
      */
-    private $createdAt;
+    private $beginAt;
 
     /**
      * @ORM\Column(type="integer")
      * @ORM\ManyToOne(targetEntity="App\Entity\Media")
+     * @Assert\NotBlank(message="The session id can't be blank")
      */
     private $sessionId;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $finishAt;
+
+    public function __construct()
+    {
+        $this->beginAt = new DateTime();
+    }
 
     public function getId(): ?int
     {
@@ -90,14 +103,14 @@ class CustomerFeelings
         return $this;
     }
 
-    public function getPostFeelings(): ?int
+    public function getPostNotation(): ?int
     {
-        return $this->postFeelings;
+        return $this->postNotation;
     }
 
-    public function setPostFeelings(?int $postFeelings): self
+    public function setPostNotation(?int $postNotation): self
     {
-        $this->postFeelings = $postFeelings;
+        $this->postNotation = $postNotation;
 
         return $this;
     }
@@ -114,14 +127,14 @@ class CustomerFeelings
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getBeginAt(): ?\DateTimeInterface
     {
-        return $this->createdAt;
+        return $this->beginAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    public function setBeginAt(\DateTimeInterface $beginAt): self
     {
-        $this->createdAt = $createdAt;
+        $this->beginAt = $beginAt;
 
         return $this;
     }
@@ -134,6 +147,18 @@ class CustomerFeelings
     public function setSessionId(int $sessionId): self
     {
         $this->sessionId = $sessionId;
+
+        return $this;
+    }
+
+    public function getFinishAt(): ?\DateTimeInterface
+    {
+        return $this->finishAt;
+    }
+
+    public function setFinishAt(?\DateTimeInterface $finishAt): self
+    {
+        $this->finishAt = $finishAt;
 
         return $this;
     }
