@@ -1,8 +1,8 @@
 <?php 
 namespace App\Controller;
 
-use App\Entity\Media;
-use App\Form\MediaFileType;
+use App\Entity\Session;
+use App\Form\SessionType;
 use App\Service\FileUploader;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class MediaManagerController extends AbstractController {
+class SessionManagerController extends AbstractController {
     
 
     private $fileUploader;
@@ -39,9 +39,9 @@ class MediaManagerController extends AbstractController {
 
         try 
         {
-            $media = new Media();
+            $media = new Session();
         
-            $form = $this->createForm(MediaFileType::class, $media);
+            $form = $this->createForm(SessionType::class, $media);
    
             $data = array_merge( $request->request->all(), ["mediaFile" => $request->files->get("mediaFile")]);
             
@@ -104,7 +104,7 @@ class MediaManagerController extends AbstractController {
                 return new Response("The media doesn't already exist", HTTP_NOT_FOUND);
             }
 
-            $form = $this->createForm(MediaFileType::class, $media);
+            $form = $this->createForm(SessionType::class, $media);
 
             $form->submit($data);
    

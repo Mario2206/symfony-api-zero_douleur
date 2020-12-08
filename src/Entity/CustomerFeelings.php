@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\CustomerFeelingsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=CustomerFeelingsRepository::class)
@@ -19,22 +20,33 @@ class CustomerFeelings
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\Range(
+     *      min=0,
+     *      max=10,
+     *      notInRangeMessage="The feeling notation must be between {{ min }} and {{ max }}"
+     * )
      */
     private $preNotation;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="CustomerFeelings")
      */
     private $userId;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Range(
+     *      min=0,
+     *      max=10,
+     *      notInRangeMessage="The feeling notation must be between {{ min }} and {{ max }}"
+     * )
      */
     private $postFeelings;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="CustomerFeeling")
+     * 
      */
     private $postReview;
 
@@ -42,6 +54,12 @@ class CustomerFeelings
      * @ORM\Column(type="datetime")
      */
     private $createdAt;
+
+    /**
+     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Media")
+     */
+    private $sessionId;
 
     public function getId(): ?int
     {
@@ -104,6 +122,18 @@ class CustomerFeelings
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getSessionId(): ?int
+    {
+        return $this->sessionId;
+    }
+
+    public function setSessionId(int $sessionId): self
+    {
+        $this->sessionId = $sessionId;
 
         return $this;
     }

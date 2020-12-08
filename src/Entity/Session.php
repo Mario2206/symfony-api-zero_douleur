@@ -2,16 +2,16 @@
 
 namespace App\Entity;
 
-use App\Repository\MediaRepository;
+use App\Repository\SessionRepository;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass=MediaRepository::class)
+ * @ORM\Entity(repositoryClass=SessionRepository::class)
  */
-class Media
+class Session
 {
     /**
      * @ORM\Id

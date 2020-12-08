@@ -9,7 +9,8 @@ class CustomerFeelingsType extends AbstractType {
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        // $builder
-        //     ->add("")
+        $builder
+            ->add("preNotation")
+            ->add("");
     }
 }
