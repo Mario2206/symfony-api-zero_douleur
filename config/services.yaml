@@ -5,6 +5,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     media_directory : "%kernel.project_dir%/public/uploads/media"
+    media_path : "/static/media/"
 
 services:
     # default configuration for services in *this* file
@@ -34,6 +35,11 @@ services:
         arguments: 
             $targetDirectory : "%kernel.project_dir%/public/uploads/media"
     
-    App\Service\Serializer\ISerializerFactory : '@App\Service\Serializer\SerializerFactory'
+    App\Service\Serializer\SessionNormalizer : 
+        tags: ['serializer.normalizer']
+        arguments: 
+            $mediaDirUrl : "%media_path%"
+
+    
     
 
