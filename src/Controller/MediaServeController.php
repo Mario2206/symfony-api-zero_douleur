@@ -11,6 +11,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class MediaServeController extends AbstractController {
 
     /**
+     * For serving media file 
+     * 
      * @Route("/static/media/{filename}",name="app_serve_file", methods={"GET"})
      */
     public function serveSessionVideo($filename, ParameterBagInterface $parameters) {
