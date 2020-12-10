@@ -7,23 +7,51 @@
 #### POST : 
 
 * **/register** : Permet d'envoyer ses données d'inscription
-    * lastname : Nom de famille de l'utilisateur (string) (au moins 2 caractères)
-    * firstname : Prénom de l'utilisateur (string) (au moins 2 caractères)
-    * username : Nom d'utilisateur (string) (au moins 2 caractères)
-    * email : Mail de l'utilisateur (string)
-    * agreeTerms : L'utilisateur accepte ou non les conditions d'utilisation (boolean)
+```
+Contenu à envoyer au format JSON : 
+
+{
+    "lastname" : "Nom de famille de l'utilisateur (string) (au moins 2 caractères)",
+    "firstname" : "Prénom de l'utilisateur (string) (au moins 2 caractères)",
+    "username" : "Nom d'utilisateur (string) (au moins 2 caractères),
+    "email" : "Mail de l'utilisateur (string)",
+    "agreeTerms" : "L'utilisateur accepte ou non les conditions d'utilisation (boolean)"
+}
+
+```
 
 * **/login** : Permet d'envoyer ses données de connexion afin de recevoir un token d'authentification  
-    * username : Nom d'utilisateur (string)
-    * password : Mot de passe (string)
+```
+Contenu à envoyer au format JSON : 
+
+{
+    "username" : "Nom d'utilisateur (string)",
+    "password" : "Mot de passe (string)"
+} 
+```
 
 * **/api/session/{sessionId}/notation** : Permet d'envoyer une première notation du ressenti de l'utilisateur avant de commencer une session 
     * sessionId : Identifiant de la session (integer)
+```
+Contenu à envoyer au format JSON : 
+
+{
+    "preNotation" : "Première Notation du ressenti utilisateur (integer entre 0 et 10)
+} 
+```
 
 #### PUT : 
 
 * **/api/session/{sessionId}/notation** : Permet d'envoyer une seconde notation du ressenti de l'utilisateur après la session
     * sessionId : Identifiant de la session (integer)
+```
+Contenu à envoyer au format JSON : 
+
+{
+    "postNotation" : "Seconde Notation du ressenti utilisateur (integer entre 0 et 10),
+    "postReview" : "Commentaires par rapport à la session (string)
+} 
+```
 
 #### GET :
 
@@ -48,9 +76,10 @@
 
 ```
 Contenu à envoyer au format JSON :
-
-* username : Nom d'utilisateur (string)
-* password : Mot de passe (string)
+{
+    "username" : "Nom d'utilisateur (string)",
+    "password" : "Mot de passe (string)"
+}
 ```
 
 * **/api/admin/session** : Permet de créer une nouvelle session 
@@ -59,8 +88,8 @@ Contenu à envoyer au format JSON :
 Contenu à envoyer au format Form-Data (pour que le fichier puisse être envoyé) :
 
 * title : Titre de la session (string) (min. 2 caractères)
-* description : Description de la session (string)
-* tag : Catégorie de la session 
+* description :
+* tag : 
 * mediaFile : Fichier média qui servir de support à la session
 ```
 
