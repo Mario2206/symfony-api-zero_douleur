@@ -21,7 +21,7 @@ class SessionType extends AbstractType {
             ->add("description", TextType::class, [
                 "empty_data" => ""
             ])
-            ->add("tags", TextType::class, [
+            ->add("tag", TextType::class, [
                 "empty_data" => ""
             ])
             ->add("mediaFile");

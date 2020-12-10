@@ -19,34 +19,22 @@ class CustomerFeelingsRepository extends ServiceEntityRepository
         parent::__construct($registry, CustomerFeelings::class);
     }
 
-    /**
-      * @return CustomerFeelings[] Returns an array of CustomerFeelings objects
-     */
-    
-    public function findMostRecentCustomerFeelings($sessionId, $userId)
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.sessionId = :sessionId')
-            ->andWhere('c.userId = :userId')
-            ->setParameter('sessionId', $sessionId)
-            ->setParameter('userId', $userId)
-            ->orderBy('c.createdAt', 'DESC')
-            ->setMaxResults(1)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    
 
-    /*
-    public function findOneBySomeField($value): ?CustomerFeelings
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+    public function getCustomerFeelingsFromOneSession(int $sessionId) {
+        return $this->createQueryBuilder("c")
+                ->andWhere('c.sessionId = :sessionId')
+                ->setParameter("sessionId", $sessionId)
+                ->getQuery()
+                ->getResult();
     }
-    */
+
+    public function removeManyRowAccordingToSession(int $sessionId) {
+        return $this->createQueryBuilder("c")
+                ->delete()
+                ->andWhere("c.sessionId = :sessionId")
+                ->setParameter("sessionId", $sessionId)
+                ->getQuery()
+                ->getResult();
+    }
+    
 }

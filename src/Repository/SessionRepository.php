@@ -19,32 +19,80 @@ class SessionRepository extends ServiceEntityRepository
         parent::__construct($registry, Session::class);
     }
 
-    // /**
-    //  * @return ContentVideo[] Returns an array of ContentVideo objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+    /**
+     * For getting session 
+     * 
+     * @param int $sessionId
+     * 
+     * @return array | null
+     */
+    public function getSession(int $sessionId) {
 
-    /*
-    public function findOneBySomeField($value): ?ContentVideo
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $this->createQueryBuilder("c")
+                ->andWhere('c.id = :sessionId')
+                ->setParameter("sessionId", $sessionId)
+                ->getQuery()
+                ->getResult();
+
+        
     }
-    */
+
+    /**
+     * For removing a session
+     * 
+     * @param int $session 
+     * 
+     * @return int
+     */
+    public function remove(int $sessionId) {
+        return $this->createQueryBuilder("c")
+                ->delete()
+                ->andWhere('c.id = :sessionId')
+                ->setParameter("sessionId", $sessionId)
+                ->getQuery()
+                ->getResult();
+    }
+
+    /**
+     * For getting many sessions
+     * 
+     * @param int $start 
+     * @param int $offset 
+     * @param string $tag 
+     * 
+     * @return Session[]
+     */
+    public function getMany(int $start, int $offset, string $tag) {
+
+        $req = $this->createQueryBuilder("c")
+            ->setFirstResult($start)
+            ->setMaxResults($offset);
+        if($tag) {
+            $req
+            ->andWhere( "c.tag = :tag" )
+            ->setParameter("tag", $tag);
+        }
+            
+         return $req   
+            ->orderBy("c.uploadedAt", "DESC")
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * For getting a session with notations
+     * 
+     * @param int $sessionId
+     * 
+     * @return Session
+     */
+    public function getSessionWithNotation (int $sessionId) {
+        return $this->createQueryBuilder("c")
+                ->innerJoin("c.customerFeelings", "customerFeelings")
+                ->andWhere('c.id = :sessionId')
+                ->setParameter("sessionId", $sessionId)
+                ->getQuery()
+                ->getResult();
+    }
+
 }

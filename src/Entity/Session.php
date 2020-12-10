@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\SessionRepository;
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -42,7 +44,7 @@ class Session
      * @ORM\Column(type="text")
      * @Assert\NotBlank(message="Tags shouldn't be blank")
      */
-    private $tags;
+    private $tag;
 
     /**
      * @ORM\Column(type="text")
@@ -65,9 +67,11 @@ class Session
      */
     private $uploadedAt;
 
+
     public function __construct()
     {
         $this->uploadedAt = new DateTime();
+        $this->customerFeelings = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -99,14 +103,14 @@ class Session
         return $this;
     }
 
-    public function getTags(): ?string
+    public function getTag(): ?string
     {
-        return $this->tags;
+        return preg_replace('/_/', ' ', $this->tag);
     }
 
-    public function setTags(string $tags): self
+    public function setTag(string $tag): self
     {
-        $this->tags = $tags;
+        $this->tag = preg_replace('/\s+/', '_', $tag);
 
         return $this;
     }
@@ -154,4 +158,6 @@ class Session
     {
         return $this->mediaFile;
     }
+
+   
 }

@@ -20,3 +20,5 @@
 ###< lexik/jwt-authentication-bundle ###
 
 public/uploads/
+.vscode
+.idea

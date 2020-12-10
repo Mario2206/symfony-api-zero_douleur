@@ -32,7 +32,7 @@ class CustomerFeelings
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="CustomerFeelings")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="customerFeelings")
      */
     private $userId;
 
@@ -58,9 +58,9 @@ class CustomerFeelings
     private $beginAt;
 
     /**
+     * 
      * @ORM\Column(type="integer")
-     * @ORM\ManyToOne(targetEntity="App\Entity\Media")
-     * @Assert\NotBlank(message="The session id can't be blank")
+     * 
      */
     private $sessionId;
 

@@ -13,9 +13,6 @@ class CustomerFeelingsType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add("sessionId", null , [
-                "mapped" => !$options['update']
-            ])
             ->add("userId", null , [
                 "mapped" => !$options['update']
             ])

@@ -33,7 +33,7 @@ security:
 
         
         api_auth :
-            pattern : ^/api/auth
+            pattern : ^/api/admin
             stateless: true
             guard :
                 authenticators: 

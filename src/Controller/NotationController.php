@@ -14,16 +14,15 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class NotationController extends AbstractController {
 
+
     /**
      * For posting notation before taking part to the session
      * 
-     * @Route("/api/session/{sessionId}", name="app_set_notation", methods={"POST"})
+     * @Route("/api/session/{sessionId}/notation", name="app_set_notation", methods={"POST"})
      */
     public function postPreNotation($sessionId, Request $req) {
 
         $jsonRequest = $req->request->all();
-        
-        $jsonRequest["sessionId"] = $sessionId;
 
         if($user = $this->getUser()) {
             $jsonRequest["userId"] = $user->getId();
@@ -41,6 +40,7 @@ class NotationController extends AbstractController {
             $session = $em->find(Session::class, $sessionId);
 
             if($session) {
+                $customerFeelings->setSessionId($sessionId);
                 $em->persist($customerFeelings);
                 $em->flush();
 
@@ -69,7 +69,7 @@ class NotationController extends AbstractController {
      * 
      * For posting notation after taking part to the session
      * 
-     * @Route("/api/session/{sessionId}", name="app_update_notation", methods={"PUT"})
+     * @Route("/api/session/{sessionId}/notation", name="app_update_notation", methods={"PUT"})
      */
     public function postEndNotation($sessionId, Request $req) {
 

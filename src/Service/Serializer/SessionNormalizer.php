@@ -3,6 +3,7 @@
 namespace App\Service\Serializer;
 
 use App\Entity\Session;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Normalizer\ContextAwareNormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
@@ -24,9 +25,15 @@ class SessionNormalizer implements ContextAwareNormalizerInterface {
     public function normalize($session, string $format = null, array $context = [])
     {
 
-        $this->normalizer->setSerializer(new Serializer([new DateTimeNormalizer()]));
+        $this->normalizer->setSerializer(new Serializer([new DateTimeNormalizer(), new ObjectNormalizer()]));
 
-        $data = $this->normalizer->normalize($session, $format, $context);
+        $serializeContext = [
+            AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function ($obj, $fomat, $context) {
+                return $obj->getTitle();
+            }
+        ];
+
+        $data = $this->normalizer->normalize($session, $format, $serializeContext);
        
         $data["mediaUrl"] = $this->mediaDirUrl . $data["filename"];
 
