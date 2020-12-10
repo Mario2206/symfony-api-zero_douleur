@@ -46,29 +46,35 @@
 
 * **/login** : Permet d'envoyer ses données de connexion afin de recevoir un token d'authentification 
 
+```
 Contenu à envoyer au format JSON :
 
 * username : Nom d'utilisateur (string)
 * password : Mot de passe (string)
+```
 
 * **/api/admin/session** : Permet de créer une nouvelle session 
 
+```
 Contenu à envoyer au format Form-Data (pour que le fichier puisse être envoyé) :
 
 * title : Titre de la session (string) (min. 2 caractères)
 * description : Description de la session (string)
 * tag : Catégorie de la session 
 * mediaFile : Fichier média qui servir de support à la session
- 
+```
+
 * **/api/admin/session/{sessionId}** : Permet de modifier une session déjà existante
     * sessionId : Identifiant de la session (integer)
-
+    
+```
 Contenu à envoyer au format Form-Data (pour que le fichier puisse être envoyé):
 
 * title : Titre de la session (string) (min. 2 caractères)
 * description : Description de la session (string)
 * tag : Catégorie de la session 
 * mediaFile : Fichier média qui servir de support à la session
+```
 
 *Ici l'API utilise le verbe HTTP POST pour la modification de la ressource au lieu du verbe PUT conventionnel : cela est dû à un bug de symfony qui ne détecte pas le contenu des champs envoyés*
 
