@@ -14,6 +14,7 @@ class SessionNormalizer implements ContextAwareNormalizerInterface {
     
     private $normalizer;
     private $mediaDirUrl;
+    private $hostname = "";
 
     public function __construct( ObjectNormalizer $normalizer, string $mediaDirUrl )
     {
@@ -35,7 +36,7 @@ class SessionNormalizer implements ContextAwareNormalizerInterface {
 
         $data = $this->normalizer->normalize($session, $format, $serializeContext);
        
-        $data["mediaUrl"] = $this->mediaDirUrl . $data["filename"];
+        $data["mediaUrl"] = $this->hostname .  $this->mediaDirUrl . $data["filename"];
 
         return $data;
     }
@@ -43,6 +44,10 @@ class SessionNormalizer implements ContextAwareNormalizerInterface {
     public function supportsNormalization($data, string $format = null, array $context = [])
     {
         return $data instanceof Session;
+    }
+
+    public function setHostname(string $hostname) {
+        $this->hostname = $hostname ;
     }
 
 }

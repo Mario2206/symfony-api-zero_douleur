@@ -24,7 +24,9 @@ class SessionController extends AbstractController {
         $session = $mediaRepository->getSession($idSession);
          
         if($session) {
-            
+
+            $sessionNormalizer->setHostname("http://" . $_SERVER['HTTP_HOST']);
+
             $serializer = new Serializer([$sessionNormalizer], [new JsonEncoder()]);
             
             $res = $serializer->serialize($session, 'json');
@@ -37,12 +39,13 @@ class SessionController extends AbstractController {
 
 
     /**
-     * @Route("/api/sessions/start/{start}/offset/{offset}", name="app_get_sessions")
-     * @Route("/api/sessions/start/{start}/offset/{offset}/tag/{tag}", name="app_get_sessions")
+     * @Route("/api/sessions", name="app_get_all_sessions")
+     * @Route("/api/sessions/start/{start}/offset/{offset}", name="app_get_sessions_by_offset")
+     * @Route("/api/sessions/start/{start}/offset/{offset}/tag/{tag}", name="app_get_sessions_by_categories")
      * 
      */
-    public function getManySessions($start = 0, $offset = 2, $tag = "", SessionRepository $sessionRepository, SessionNormalizer $sessionNormalizer) {
-
+    public function getManySessions($start = 0, $offset = 0, $tag = "", SessionRepository $sessionRepository, SessionNormalizer $sessionNormalizer) {
+        
         $sessions = $sessionRepository->getMany($start, $offset, $tag);
 
         $serializer = new Serializer([$sessionNormalizer], [new JsonEncoder()]);

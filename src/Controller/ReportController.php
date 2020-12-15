@@ -21,7 +21,8 @@ class ReportController extends AbstractController {
         $this->denyAccessUnlessGranted("ROLE_ADMIN");
 
         $sessionWithNotations = $customerFeelingsRepository->getCustomerFeelingsFromOneSession($sessionId);
-
+        
+        
         $serializer = new Serializer([$customerFeelingsNormalizer, new DateTimeNormalizer()], [new JsonEncoder()]);
 
         $res = $serializer->serialize($sessionWithNotations, "json");

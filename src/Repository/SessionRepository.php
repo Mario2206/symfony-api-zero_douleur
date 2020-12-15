@@ -32,7 +32,7 @@ class SessionRepository extends ServiceEntityRepository
                 ->andWhere('c.id = :sessionId')
                 ->setParameter("sessionId", $sessionId)
                 ->getQuery()
-                ->getResult();
+                ->getOneOrNullResult();
 
         
     }
@@ -65,8 +65,12 @@ class SessionRepository extends ServiceEntityRepository
     public function getMany(int $start, int $offset, string $tag) {
 
         $req = $this->createQueryBuilder("c")
-            ->setFirstResult($start)
-            ->setMaxResults($offset);
+            ->setFirstResult($start);
+            
+        if($offset) {
+            $req->setMaxResults($offset);
+        }
+           
         if($tag) {
             $req
             ->andWhere( "c.tag = :tag" )
