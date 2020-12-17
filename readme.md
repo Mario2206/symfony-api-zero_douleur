@@ -114,7 +114,7 @@ Contenu à envoyer au format Form-Data (pour que le fichier puisse être envoyé
 
 #### GET :
 
-* **/api/auth/report/{sessionId}** : Permet de récupérer les notes (ressentis) de tous les utilisateurs ayant participé à une session précise.
+* **/api/admin/report/{sessionId}** : Permet de récupérer les notes (ressentis) de tous les utilisateurs ayant participé à une session précise.
     * sessionId : Identifiant de la session (integer) 
 
 

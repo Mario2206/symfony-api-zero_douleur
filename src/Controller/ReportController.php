@@ -14,7 +14,7 @@ use Symfony\Component\Serializer\Serializer;
 class ReportController extends AbstractController {
 
     /**
-     * @Route("/api/auth/report/{sessionId}")
+     * @Route("/api/admin/report/{sessionId}")
      */
     public function getSessionReport (int $sessionId, CustomerFeelingsRepository $customerFeelingsRepository, CustomerFeelingsNormalizer $customerFeelingsNormalizer) {
 

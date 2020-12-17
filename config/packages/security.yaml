@@ -35,6 +35,7 @@ security:
         api_auth :
             pattern : ^/api/admin
             stateless: true
+            user_checker : App\Security\UserChecker
             guard :
                 authenticators: 
                 - lexik_jwt_authentication.jwt_token_authenticator
@@ -43,6 +44,7 @@ security:
             pattern : ^/api
             stateless: true
             anonymous: true
+            user_checker : App\Security\UserChecker
             guard :
                 authenticators: 
                 - lexik_jwt_authentication.jwt_token_authenticator
