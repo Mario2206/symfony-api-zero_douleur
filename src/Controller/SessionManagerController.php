@@ -67,7 +67,7 @@ class SessionManagerController extends AbstractController {
             $em->flush();
             
             
-            return new JsonResponse("File uploaded with success", HTTP_CREATED);
+            return new JsonResponse(["message" => "File uploaded with success"], HTTP_CREATED);
 
         }
         catch (UploadException $e) 
@@ -125,7 +125,7 @@ class SessionManagerController extends AbstractController {
             $em = $this->getDoctrine()->getManager();
             $em->flush();
 
-            return new JsonResponse("Successful update", HTTP_SUCCESS);
+            return new JsonResponse(["message" => "Successful update"], HTTP_SUCCESS);
 
         } 
         catch(UploadException $e) 
@@ -164,7 +164,7 @@ class SessionManagerController extends AbstractController {
             $customerFeelingsRepository->removeManyRowAccordingToSession($sessionId);
 
 
-            return new JsonResponse("Session has been removed", HTTP_SUCCESS);
+            return new JsonResponse(["message" => "Session has been removed"], HTTP_SUCCESS);
 
         } catch( IOException $e) {
 
