@@ -16,7 +16,7 @@ class ExceptionSubscriber implements EventSubscriberInterface {
     public function onKernelException(ExceptionEvent $event) {
 
         $exception = $event->getThrowable();
-    
+       
         $res = $this->createApiResponse($exception);
         $event->setResponse($res);
        
@@ -29,7 +29,7 @@ class ExceptionSubscriber implements EventSubscriberInterface {
         ];
     }
 
-    private function createApiResponse(\Exception $exception) {
+    private function createApiResponse( $exception) {
         $statusCode = $exception instanceof HttpException ? $exception->getStatusCode() : Response::HTTP_INTERNAL_SERVER_ERROR;
         $errors = [$exception->getMessage()];
 

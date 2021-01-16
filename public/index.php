@@ -6,6 +6,8 @@ use Symfony\Component\ErrorHandler\Debug;
 use Symfony\Component\HttpFoundation\Request;
 
 require dirname(__DIR__) . "/src/Constant/http-code.php";
+require dirname(__DIR__) . "/src/Constant/message-size.php";
+require dirname(__DIR__) . "/src/Constant/roles.php";
 
 require dirname(__DIR__).'/vendor/autoload.php';
 

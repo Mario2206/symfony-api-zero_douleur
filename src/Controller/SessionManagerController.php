@@ -37,8 +37,8 @@ class SessionManagerController extends AbstractController {
      * @Route("/api/admin/session", name="app_upload_create", methods={"POST"} )
      */
     public function createSession( Request $request) {
-
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+       
+        $this->denyAccessUnlessGranted(ROLE_ADMIN);
 
         $mediaFileName = "";
 
@@ -53,7 +53,7 @@ class SessionManagerController extends AbstractController {
             $form->submit( $data );
             
             if(!$form->isValid()) {
-                return new JsonResponse ($this->formErrorSerializer->serializeToJson($form->getErrors(true)));
+                return new JsonResponse ($this->formErrorSerializer->serializeToJson($form->getErrors(true)), HTTP_BAD_REQUEST);
             }
 
             $mediaFile = $form->get("mediaFile")->getData(); 
@@ -78,9 +78,11 @@ class SessionManagerController extends AbstractController {
         }
         catch(Exception $e) 
         {
+            if($mediaFileName) {
+                 $this->fileUploader->deleteFile($mediaFileName);
 
-            $this->fileUploader->deleteFile($mediaFileName);
-
+            }
+           
             return new JsonResponse($e->getMessage(), HTTP_SERVER_ERROR);
 
         }
@@ -93,7 +95,7 @@ class SessionManagerController extends AbstractController {
      */
     public function updateSession ($sessionId, Request $request) {
 
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $this->denyAccessUnlessGranted(ROLE_ADMIN);
 
         try 
         {
@@ -145,7 +147,7 @@ class SessionManagerController extends AbstractController {
      */
     public function deleteSession($sessionId, FileUploader $fileUploader, SessionRepository $sessionRepository, CustomerFeelingsRepository $customerFeelingsRepository) {
 
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $this->denyAccessUnlessGranted(ROLE_ADMIN);
 
         try {
 
