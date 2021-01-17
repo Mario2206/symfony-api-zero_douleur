@@ -44,15 +44,7 @@ class NotationController extends AbstractController {
                 $em->persist($customerFeelings);
                 $em->flush();
 
-                $cookie =  Cookie::create("customerFeelingsId")
-                            ->withValue($customerFeelings->getId())
-                            ->withExpires( strtotime("now + 12 hours"))
-                            ->withDomain("localhost")
-                            ->withPath( "/" );
-
-                $response = new JsonResponse( ["message" => "Notation registered !"], \HTTP_CREATED); 
-
-                $response->headers->setCookie($cookie);
+                $response = new JsonResponse( ["customerFeelingsId" => $customerFeelings->getId()], \HTTP_CREATED); 
 
                 return $response;
             }
@@ -73,16 +65,16 @@ class NotationController extends AbstractController {
      */
     public function postEndNotation($sessionId, Request $req) {
 
-        $customerFeelingsId = $req->cookies->get("customerFeelingsId");
+        $feelingsId = $req->request->get("customerFeelingsId");
 
-        if(!$customerFeelingsId) {
+        if(!$feelingsId) {
 
             return new JsonResponse(["message" => "The customer isn't authentify"], HTTP_BAD_REQUEST);
 
         }
 
         $em = $this->getDoctrine()->getManager();
-        $customerFeelings = $em->find(CustomerFeelings::class,$customerFeelingsId);
+        $customerFeelings = $em->find(CustomerFeelings::class,$feelingsId);
 
         if(!$customerFeelings) {
             return new JsonResponse(["message" => "The initial customer feeling doesn't exist"], HTTP_NOT_FOUND);

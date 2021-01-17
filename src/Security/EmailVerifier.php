@@ -61,7 +61,7 @@ class EmailVerifier
 
         //Find user thanks to credentials
         $user = $this->entityManager->find(User::class,$userData["id"]);
-
+        
         if(!$user) {
             throw new VerifyEmailExceptionInterface("User doesn't found");
         }

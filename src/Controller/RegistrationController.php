@@ -34,7 +34,7 @@ class RegistrationController extends AbstractController
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->submit($request->request->all());
-
+        
         if ( $form->isValid()) {
             // encode the plain password
             $user->setPassword(
@@ -43,7 +43,7 @@ class RegistrationController extends AbstractController
                     $form->get('password')->getData()
                 )
             );
-
+            
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
@@ -58,12 +58,12 @@ class RegistrationController extends AbstractController
             );
             // do anything else you need here, like send an email
 
-            return new JsonResponse("Good subscription");
+            return new JsonResponse(["message" => "Good subscription"]);
         }
 
         $errors = $formErrorSerializer->serializeToJson($form->getErrors(true));
 
-        return new JsonResponse($errors);
+        return new JsonResponse($errors, HTTP_BAD_REQUEST);
     }
 
     /**

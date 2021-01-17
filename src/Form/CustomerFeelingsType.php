@@ -24,6 +24,9 @@ class CustomerFeelingsType extends AbstractType {
             ])
             ->add("postReview", null , [
                 "mapped" => $options['update']
+            ])
+            ->add('customerFeelingsId', null,  [
+                "mapped" => false
             ]);
     }
 
