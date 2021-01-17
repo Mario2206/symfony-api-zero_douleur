@@ -19,13 +19,12 @@ class SessionController extends AbstractController {
     /**
      * @Route("/api/session/{idSession}", name="app_get_session", methods={"GET"})
      */
-    public function getSession ($idSession, SessionNormalizer $sessionNormalizer, SessionRepository $mediaRepository, ParameterBagInterface $params) {
+    public function getSession ($idSession, SessionNormalizer $sessionNormalizer, SessionRepository $mediaRepository) {
 
         $session = $mediaRepository->getSession($idSession);
          
         if($session) {
 
-            $sessionNormalizer->setHostname("http://" . $_SERVER['HTTP_HOST']);
 
             $serializer = new Serializer([$sessionNormalizer], [new JsonEncoder()]);
             

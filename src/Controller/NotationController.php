@@ -8,8 +8,8 @@ use App\Form\CustomerFeelingsType;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Cookie;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class NotationController extends AbstractController {
@@ -50,18 +50,18 @@ class NotationController extends AbstractController {
                             ->withDomain("localhost")
                             ->withPath( "/" );
 
-                $response = new Response( "Notation registered !", \HTTP_CREATED); 
+                $response = new JsonResponse( ["message" => "Notation registered !"], \HTTP_CREATED); 
 
                 $response->headers->setCookie($cookie);
 
                 return $response;
             }
             
-            return new Response("The session doesn't exist", HTTP_NOT_FOUND);
+            return new JsonResponse(["message" => "The session doesn't exist"], HTTP_NOT_FOUND);
 
         }
 
-        return new Response($feelingsForm->getErrors(true), \HTTP_BAD_REQUEST);
+        return new JsonResponse($feelingsForm->getErrors(true), \HTTP_BAD_REQUEST);
 
     }
 
@@ -77,7 +77,7 @@ class NotationController extends AbstractController {
 
         if(!$customerFeelingsId) {
 
-            return new Response("The customer isn't authentify", HTTP_BAD_REQUEST);
+            return new JsonResponse(["message" => "The customer isn't authentify"], HTTP_BAD_REQUEST);
 
         }
 
@@ -85,7 +85,7 @@ class NotationController extends AbstractController {
         $customerFeelings = $em->find(CustomerFeelings::class,$customerFeelingsId);
 
         if(!$customerFeelings) {
-            return new Response("The initial customer feeling doesn't exist", HTTP_NOT_FOUND);
+            return new JsonResponse(["message" => "The initial customer feeling doesn't exist"], HTTP_NOT_FOUND);
         } 
 
         $form = $this->createForm(CustomerFeelingsType::class, $customerFeelings, ["update"=>true]);
@@ -93,13 +93,13 @@ class NotationController extends AbstractController {
         $form->submit($req->request->all());
         
         if(!$form->isValid()) {
-            return new Response($form->getErrors(true), HTTP_BAD_REQUEST);
+            return new JsonResponse($form->getErrors(true), HTTP_BAD_REQUEST);
         }
 
         $customerFeelings->setFinishAt(new DateTime());
         $em->persist($customerFeelings);
         $em->flush();
 
-        return new Response("Notation registered !", \HTTP_SUCCESS);
+        return new JsonResponse(["message" => "Notation registered !"], \HTTP_SUCCESS);
     }
 }

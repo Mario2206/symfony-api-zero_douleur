@@ -39,8 +39,11 @@ services:
         tags: ['serializer.normalizer']
         arguments: 
             $mediaDirUrl : "%media_path%"
+            $hostname : '%env(resolve:SERVER_NAME)%'
+            $protocol: '%env(resolve:PROTOCOL)%'
 
-
-    
-    
+    Symfony\Component\Serializer\Normalizer\DateTimeNormalizer:
+        arguments:
+            $defaultContext:
+                datetime_format: 'Y-m-d\TH:i:s.v\Z'
 
