@@ -33,7 +33,7 @@ class SessionController extends AbstractController {
             return new JsonResponse(  $res , \HTTP_SUCCESS);
         }
         
-        return new JsonResponse("No session found", \HTTP_BAD_REQUEST);
+        return new JsonResponse(["message" => "No session found"], \HTTP_BAD_REQUEST);
     }
 
 
